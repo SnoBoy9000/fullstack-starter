@@ -5,15 +5,11 @@ import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
-import org.apache.maven.surefire.shade.org.apache.maven.shared.utils.cli.Arg;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.index.Index;
 import org.springframework.data.mongodb.core.index.IndexOperations;
 import org.springframework.util.Assert;
-
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
-import com.fasterxml.jackson.core.sym.Name;
 import com.starter.fullstack.api.Inventory;
 
 /**

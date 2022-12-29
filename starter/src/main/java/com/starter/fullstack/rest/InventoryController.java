@@ -40,4 +40,3 @@ public class InventoryController {
     return this.inventoryDAO.create(inventory);
   }
 }
-
