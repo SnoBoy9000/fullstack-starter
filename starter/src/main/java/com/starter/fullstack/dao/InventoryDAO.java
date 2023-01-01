@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
-
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.index.Index;
@@ -53,10 +52,8 @@ public class InventoryDAO {
    * @return Created/Updated Inventory.
    */
   public Inventory create(Inventory inventory) {
-    // TODO TASK 1 
     inventory.setId(null);
-    mongoTemplate.save(inventory);
-    return inventory;
+    return this.mongoTemplate.save(inventory);
   }
 
 

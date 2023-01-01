@@ -29,6 +29,7 @@ public class InventoryDAOTest {
   private InventoryDAO inventoryDAO;
   private static final String NAME = "Amber";
   private static final String PRODUCT_TYPE = "hops";
+  private static final String ID = "Id";
 
   @Before
   public void setup() {
@@ -56,10 +57,22 @@ public class InventoryDAOTest {
   // Test 'Create' DAO method
   @Test
   public void create() {
-
     Inventory inventory = new Inventory();
+    inventory.setId(ID);
+    inventory.setName(NAME);
+    inventory.setProductType(PRODUCT_TYPE);
+
     Inventory createdInventory = this.inventoryDAO.create(inventory);
+
     String id = createdInventory.getId();
+    String name = createdInventory.getName();
+    String productType = createdInventory.getProductType();
+
+    // Check createdInventory has a unique id and therefore an inventory was saved
     Assert.assertNotNull(id);
+    // Check that id, name, and product type of the save inventory is different from the initial string values
+    Assert.assertNotSame(ID, id);
+    Assert.assertSame(NAME, name);
+    Assert.assertSame(PRODUCT_TYPE, productType);
   }
 }
