@@ -22,49 +22,48 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 public class InventoryControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+  @Autowired
+  private MockMvc mockMvc;
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
+  @Autowired
+  private MongoTemplate mongoTemplate;
 
-    @Autowired
-    private ObjectMapper objectMapper;
+  @Autowired
+  private ObjectMapper objectMapper;
 
-    private Inventory inventory;
+  private Inventory inventory;
 
-    @Before
-    public void setup() throws Throwable {
-        this.inventory = new Inventory();
-        this.inventory.setId("ID");
-        this.inventory.setName("TEST");
-        // Sets the Mongo ID for us
-        this.inventory = this.mongoTemplate.save(this.inventory);
-    }
+  @Before
+  public void setup() throws Throwable {
+    this.inventory = new Inventory();
+    this.inventory.setId("ID");
+    this.inventory.setName("TEST");
+    // Sets the Mongo ID for us
+    this.inventory = this.mongoTemplate.save(this.inventory);
+  }
 
-    @After
-    public void teardown() {
-        this.mongoTemplate.dropCollection(Inventory.class);
-    }
+  @After
+  public void teardown() {
+    this.mongoTemplate.dropCollection(Inventory.class);
+  }
 
-    /** 
-     * Test create endpoint
-     * @throws Throwable see MockMvc
-     */
+  /** 
+   * Test create endpoint
+   * @throws Throwable see MockMvc
+   */
 
-     @Test
-     public void create() throws Throwable{
-        this.inventory = new Inventory();
-        this.inventory.setId("OTHER ID");
-        this.inventory.setName("ALSO TEST");
-        this.mockMvc.perform(post("/inventory")
-            .accept(MediaType.APPLICATION_JSON)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(this.objectMapper.writeValueAsString(this.inventory)))
-        .andExpect(status().isOk());
+  @Test
+  public void create() throws Throwable {
+    this.inventory = new Inventory();
+    this.inventory.setId("OTHER ID");
+    this.inventory.setName("ALSO TEST");
+    this.inventory.setProductType("PRODUCT_TYPE");
+    this.mockMvc.perform(post("/inventory")
+        .accept(MediaType.APPLICATION_JSON)
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(this.objectMapper.writeValueAsString(this.inventory)))
+      .andExpect(status().isOk());
 
-        Assert.assertEquals(2, this.mongoTemplate.findAll(Inventory.class).size());
-     }
+    Assert.assertEquals(2, this.mongoTemplate.findAll(Inventory.class).size());
+  }
 }
-
-
