@@ -29,6 +29,7 @@ public class InventoryDAOTest {
   private InventoryDAO inventoryDAO;
   private static final String NAME = "Amber";
   private static final String PRODUCT_TYPE = "hops";
+  private static final String ID = "Id";
 
   @Before
   public void setup() {
@@ -51,5 +52,28 @@ public class InventoryDAOTest {
     this.mongoTemplate.save(inventory);
     List<Inventory> actualInventory = this.inventoryDAO.findAll();
     Assert.assertFalse(actualInventory.isEmpty());
+  }
+
+  // Test 'Create' DAO method
+  @Test
+  public void create() {
+
+    Inventory inventory = new Inventory();
+    inventory.setId(ID);
+    inventory.setName(NAME);
+    inventory.setProductType(PRODUCT_TYPE);
+
+    Inventory createdInventory = this.inventoryDAO.create(inventory);
+
+    String id = createdInventory.getId();
+    String name = createdInventory.getName();
+    String productType = createdInventory.getProductType();
+
+    // Check createdInventory has a unique id and therfore an inventory was saved
+    Assert.assertNotNull(id);
+    // check that id, name, and product type fo the saved inventory is defferent from teh initial string values
+    Assert.assertNotSame(ID, id);
+    Assert.assertSame(NAME, name);
+    Assert.assertSame(PRODUCT_TYPE, productType);
   }
 }
