@@ -57,7 +57,6 @@ public class InventoryDAOTest {
   // Test 'Create' DAO method
   @Test
   public void create() {
-
     Inventory inventory = new Inventory();
     inventory.setId(ID);
     inventory.setName(NAME);
@@ -68,10 +67,10 @@ public class InventoryDAOTest {
     String id = createdInventory.getId();
     String name = createdInventory.getName();
     String productType = createdInventory.getProductType();
-
-    // Check createdInventory has a unique id and therfore an inventory was saved
+    
+    // Check createdInventory has a unique id and therefore an inventory was saved
     Assert.assertNotNull(id);
-    // check that id, name, and product type fo the saved inventory is defferent from teh initial string values
+    // Check that id, name, and product type of the save inventory is different from the initial string values
     Assert.assertNotSame(ID, id);
     Assert.assertSame(NAME, name);
     Assert.assertSame(PRODUCT_TYPE, productType);
