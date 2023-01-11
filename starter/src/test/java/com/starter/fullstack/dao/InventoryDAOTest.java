@@ -68,7 +68,7 @@ public class InventoryDAOTest {
     String id = createdInventory.getId();
     String name = createdInventory.getName();
     String productType = createdInventory.getProductType();
-
+    
     // Check createdInventory has a unique id and therefore an inventory was saved
     Assert.assertNotNull(id);
     /* Check that id, name, and product type of the save inventory is different 
