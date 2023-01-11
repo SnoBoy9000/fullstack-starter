@@ -2,6 +2,7 @@ package com.starter.fullstack.dao;
 
 import com.starter.fullstack.api.Inventory;
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.Resource;
 import org.junit.After;
 import org.junit.Assert;
@@ -70,9 +71,19 @@ public class InventoryDAOTest {
 
     // Check createdInventory has a unique id and therefore an inventory was saved
     Assert.assertNotNull(id);
-    // Check that id, name, and product type of the save inventory is different from the initial string values
+    /* Check that id, name, and product type of the save inventory is different 
+    from the initial string values */ 
     Assert.assertNotSame(ID, id);
     Assert.assertSame(NAME, name);
     Assert.assertSame(PRODUCT_TYPE, productType);
+  }
+
+  // Test 'Delete' DAO Method 
+  @Test
+  public void delete() {
+    Inventory inventory = new Inventory();
+    String id = inventory.getId();
+    Optional<Inventory> deletedInventory = this.inventoryDAO.delete(id);
+    Assert.assertFalse(deletedInventory.isPresent());
   }
 }
